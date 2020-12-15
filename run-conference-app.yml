@@ -3,10 +3,10 @@
   hosts: centos_remote_a
   tasks:
     - name: Docker test exists
-      shell: docker ps --all --quiet --filter=name="conference-test"
+      shell: docker ps --all --quiet --filter=name="appconference"
       register: conference_id
     - name: Delete container if exist
-      shell: docker rm -f conference-test
+      shell: docker rm -f appconference
       when: conference_id.stdout != ""
     - name: Start test container
-      shell: docker run -d --name conference-test -p 10100:8080 systemdevformations/conference-app
+      shell: docker run -d --name appconference -p 10100:8080 efrel20/appconference
